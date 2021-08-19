@@ -2,6 +2,7 @@ package xyz.mrcow.cowsOddWidgets;
 
 import fi.dy.masa.malilib.config.ConfigManager;
 import fi.dy.masa.malilib.event.InputEventHandler;
+import fi.dy.masa.malilib.event.TickHandler;
 import fi.dy.masa.malilib.interfaces.IInitializationHandler;
 import xyz.mrcow.cowsOddWidgets.config.Configs;
 import xyz.mrcow.cowsOddWidgets.event.InputHandler;
@@ -15,6 +16,8 @@ public class InitHandler implements IInitializationHandler {
         InputHandler handler = new InputHandler();
         InputEventHandler.getKeybindManager().registerKeybindProvider(handler);
         InputEventHandler.getInputManager().registerKeyboardInputHandler(handler);
+
+        TickHandler.getInstance().registerClientTickHandler(new ClientTickHandler());
 
         KeybindCallbacks.INSTANCE.setCallbacks();
     }

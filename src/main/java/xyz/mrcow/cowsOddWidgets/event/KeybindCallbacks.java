@@ -8,7 +8,7 @@ import fi.dy.masa.malilib.hotkeys.KeyAction;
 import net.minecraft.client.MinecraftClient;
 import xyz.mrcow.cowsOddWidgets.config.Configs;
 import xyz.mrcow.cowsOddWidgets.gui.GuiConfigs;
-import xyz.mrcow.cowsOddWidgets.util.AntiGhost;
+import xyz.mrcow.cowsOddWidgets.features.AntiGhost;
 
 public class KeybindCallbacks implements IHotkeyCallback {
 

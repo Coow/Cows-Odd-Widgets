@@ -1,6 +1,5 @@
-package xyz.mrcow.cowsOddWidgets.util;
+package xyz.mrcow.cowsOddWidgets.features;
 
-import com.mojang.brigadier.LiteralMessage;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.network.MessageType;
