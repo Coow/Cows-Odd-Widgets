@@ -13,7 +13,7 @@ public class AntiGhost {
     public static void requestBlocks(double range) {
         MinecraftClient mc = MinecraftClient.getInstance();
 
-        mc.inGameHud.addChatMessage(MessageType.SYSTEM, Text.of("Requesting blocks"), mc.player.getUuid());
+        mc.inGameHud.addChatMessage(MessageType.SYSTEM, Text.of("Requesting blocks!"), mc.player.getUuid());
 
         ClientPlayNetworkHandler conn = mc.getNetworkHandler();
         if (conn==null)
@@ -24,6 +24,7 @@ public class AntiGhost {
                 for (double dz=-range; dz<=range; dz++) {
                     PlayerActionC2SPacket packet=new PlayerActionC2SPacket(
                             PlayerActionC2SPacket.Action.ABORT_DESTROY_BLOCK,
+                            //PlayerActionC2SPacket.Action.START_DESTROY_BLOCK,
                             new BlockPos(pos.getX()+dx, pos.getY()+dy, pos.getZ()+dz),
                             Direction.UP       // with ABORT_DESTROY_BLOCK, this value is unused
                     );

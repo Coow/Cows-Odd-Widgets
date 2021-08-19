@@ -5,9 +5,8 @@ import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.hotkeys.IHotkeyCallback;
 import fi.dy.masa.malilib.hotkeys.IKeybind;
 import fi.dy.masa.malilib.hotkeys.KeyAction;
-import fi.dy.masa.malilib.interfaces.IClientTickHandler;
 import net.minecraft.client.MinecraftClient;
-import xyz.mrcow.cowsOddWidgets.config.Hotkeys;
+import xyz.mrcow.cowsOddWidgets.config.Configs;
 import xyz.mrcow.cowsOddWidgets.gui.GuiConfigs;
 import xyz.mrcow.cowsOddWidgets.util.AntiGhost;
 
@@ -22,7 +21,7 @@ public class KeybindCallbacks implements IHotkeyCallback {
 
     public void setCallbacks()
     {
-        for (ConfigHotkey hotkey : Hotkeys.HOTKEY_LIST)
+        for (ConfigHotkey hotkey : Configs.Settings.HOTKEY_LIST)
         {
             hotkey.getKeybind().setCallback(this);
         }
@@ -38,12 +37,12 @@ public class KeybindCallbacks implements IHotkeyCallback {
             return false;
         }
 
-        if (key == Hotkeys.OPEN_GUI_SETTINGS.getKeybind())
+        if (key == Configs.Settings.OPEN_GUI_SETTINGS.getKeybind())
         {
             GuiBase.openGui(new GuiConfigs());
             return true;
-        } else if(key == Hotkeys.ANTIGHOST.getKeybind()){
-            AntiGhost.requestBlocks(8);
+        } else if(key == Configs.Settings.ANTIGHOST.getKeybind()){
+            AntiGhost.requestBlocks(Configs.Settings.ANTIGHOST_RANGE.getIntegerValue());
             return true;
         }
 

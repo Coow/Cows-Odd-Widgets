@@ -10,11 +10,10 @@ import fi.dy.masa.malilib.gui.button.IButtonActionListener;
 import fi.dy.masa.malilib.util.StringUtils;
 import xyz.mrcow.cowsOddWidgets.Reference;
 import xyz.mrcow.cowsOddWidgets.config.Configs;
-import xyz.mrcow.cowsOddWidgets.config.Hotkeys;
 
 public class GuiConfigs extends GuiConfigsBase {
 
-    private static ConfigGuiTab tab = ConfigGuiTab.HOTKEYS;
+    private static ConfigGuiTab tab = ConfigGuiTab.GENERIC;
 
     public GuiConfigs()
     {
@@ -66,11 +65,7 @@ public class GuiConfigs extends GuiConfigsBase {
 
         if (tab == ConfigGuiTab.GENERIC)
         {
-            configs = Configs.Generic.OPTIONS;
-        }
-        else if (tab == ConfigGuiTab.HOTKEYS)
-        {
-            configs = Hotkeys.HOTKEY_LIST;
+            configs = Configs.Settings.OPTIONS;
         }
         else
         {
@@ -104,8 +99,7 @@ public class GuiConfigs extends GuiConfigsBase {
 
     public enum ConfigGuiTab
     {
-        GENERIC ("Generic"),
-        HOTKEYS ("Hotkeys");
+        GENERIC ("Generic");
 
         private final String translationKey;
 
