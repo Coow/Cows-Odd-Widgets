@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "xyz.mrcow.cowsOddWidgets.mixin",
+  "compatibilityLevel": "JAVA_16",
+  "mixins": [
+  ],
+  "client": [
+    "CowsOddWidgetsMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
