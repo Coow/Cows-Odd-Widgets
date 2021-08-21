@@ -7,9 +7,12 @@ import java.util.Random;
 
 public class DerpMode {
 
-    private static Random random;
+
 
     public static void doDerp(MinecraftClient mc){
+
+        Random random = new Random();
+
         //Not sure exactly why all the extra math, but thanks Wurst <3
         float yaw = mc.player.getYaw() + random.nextFloat() * 360F - 180F;
         float pitch = random.nextFloat() * 180F - 90F;

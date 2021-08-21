@@ -51,7 +51,7 @@ public class GuiConfigs extends GuiConfigsBase {
 
         if (tab == ConfigGuiTab.GENERIC)
         {
-            return 100;
+            return 150;
         }
 
         return super.getConfigWidth();
