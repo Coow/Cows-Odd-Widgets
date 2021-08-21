@@ -6,7 +6,8 @@
   "mixins": [
   ],
   "client": [
-    "CowsOddWidgetsMixin"
+    "CowsOddWidgetsMixin",
+    "EntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

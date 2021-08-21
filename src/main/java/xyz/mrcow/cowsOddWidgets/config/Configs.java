@@ -29,13 +29,15 @@ public class Configs implements IConfigHandler {
         public static final ConfigDouble AGREEMENT = new ConfigDouble("agreement", 10, 1, 15, true, "How much you agree");
         public static final ConfigDouble AGREEMENT_SPEED = new ConfigDouble("agreementSpeed", 50, 10, 180, true, "How fast you agree");
 
-        public static final ConfigHotkey        ANTIGHOST = new ConfigHotkey("antiGhost", "LEFT_CONTROL,G", "Refreshes blocks near you");
-        public static final ConfigHotkey    OPEN_GUI_SETTINGS = new ConfigHotkey("openGuiSettings","C,O,W",  "Open the Config GUI");
-        public static final ConfigHotkey    TOGGLE_DERP_MODE = new ConfigHotkey("toggleDerpMode","",  "Toggle Derp Mode");
+        public static final ConfigHotkey ANTIGHOST = new ConfigHotkey("antiGhost", "LEFT_CONTROL,G", "Refreshes blocks near you");
+        public static final ConfigHotkey OPEN_GUI_SETTINGS = new ConfigHotkey("openGuiSettings","C,O,W",  "Open the Config GUI");
+        public static final ConfigHotkey TOGGLE_DERP_MODE = new ConfigHotkey("toggleDerpMode","",  "Toggle Derp Mode");
         //public static final ConfigHotkey    TOGGLE_AUTO_TOTEM = new ConfigHotkey("toggleAutoTotem","",  "Toggle Auto Totem");
         public static final ConfigBooleanHotkeyed    TOGGLE_AUTO_TOTEM = new ConfigBooleanHotkeyed("toggleAutoTotem", false, "",  "Toggle Auto Totem");
 
         public static final ConfigBoolean STEP_MODE = new ConfigBoolean("stepMode", false,"Makes you step up blocks instead of having to jump!\nHard coded to be avoid cheaty behaviour");
+        public static final ConfigBoolean DISPLAY_PLAYER_HEALTH = new ConfigBoolean("displayPlayerHealth", false,"Displays players health in the Name Text");
+
 
         public static final ImmutableList<IConfigValue> OPTIONS = ImmutableList.of(
                 //TOGGLE_AUTO_TOTEM,
@@ -47,6 +49,7 @@ public class Configs implements IConfigHandler {
                 ANTIGHOST_RANGE,
                 AUTO_TOTEM,
                 DERP_MODE,
+                DISPLAY_PLAYER_HEALTH,
                 OPEN_GUI_SETTINGS,
                 STEP_MODE
         );
