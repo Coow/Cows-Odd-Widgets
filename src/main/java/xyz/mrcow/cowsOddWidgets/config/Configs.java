@@ -20,16 +20,13 @@ public class Configs implements IConfigHandler {
     private static final String CONFIG_FILE_NAME = Reference.MOD_ID + ".json";
 
     public static class Settings {
-        public static final ConfigInteger ANTIGHOST_RANGE = new ConfigInteger("antiGhostRange", 6, 2, 10, true, "Range of AntiGhost features area\nValues over 6 might cause issues due to the AntiCheat detecting out of reach blocks");
-        public static final ConfigBoolean DERP_MODE = new ConfigBoolean("derpMode", false,"Spins the players head server side\nMight mess with Tweakeroo features, such as flexibleBlockRotation");
-        public static final ConfigBoolean AUTO_TOTEM = new ConfigBoolean("autoTotem", false,"Automatically put a Totem of Undying in the players offhand if there is one avaliable elsewhere in the inventory");
-
         public static final ConfigBoolean AGREE_MODE = new ConfigBoolean("agreeMode", false,"Makes you agree to everything!");
-
         public static final ConfigDouble AGREEMENT = new ConfigDouble("agreement", 10, 1, 15, true, "How much you agree");
         public static final ConfigDouble AGREEMENT_SPEED = new ConfigDouble("agreementSpeed", 50, 10, 180, true, "How fast you agree");
 
+        public static final ConfigInteger ANTIGHOST_RANGE = new ConfigInteger("antiGhostRange", 6, 2, 10, true, "Range of AntiGhost features area\nValues over 6 might cause issues due to the AntiCheat detecting out of reach blocks");
         public static final ConfigHotkey ANTIGHOST = new ConfigHotkey("antiGhost", "LEFT_CONTROL,G", "Refreshes blocks near you");
+
         public static final ConfigHotkey OPEN_GUI_SETTINGS = new ConfigHotkey("openGuiSettings","C,O,W",  "Open the Config GUI");
         public static final ConfigHotkey TOGGLE_DERP_MODE = new ConfigHotkey("toggleDerpMode","",  "Toggle Derp Mode");
         //public static final ConfigHotkey    TOGGLE_AUTO_TOTEM = new ConfigHotkey("toggleAutoTotem","",  "Toggle Auto Totem");
@@ -37,6 +34,9 @@ public class Configs implements IConfigHandler {
 
         public static final ConfigBoolean STEP_MODE = new ConfigBoolean("stepMode", false,"Makes you step up blocks instead of having to jump!\nHard coded to be avoid cheaty behaviour");
         public static final ConfigBoolean DISPLAY_PLAYER_HEALTH = new ConfigBoolean("displayPlayerHealth", false,"Displays players health in the Name Text");
+        public static final ConfigBoolean DERP_MODE = new ConfigBoolean("derpMode", false,"Spins the players head server side\nMight mess with Tweakeroo features, such as flexibleBlockRotation");
+        public static final ConfigBoolean AUTO_TOTEM = new ConfigBoolean("autoTotem", false,"Automatically put a Totem of Undying in the players offhand if there is one avaliable elsewhere in the inventory");
+        public static final ConfigBoolean DISPLAY_PET_OWNER = new ConfigBoolean("displayPetOwner", false,"Displays the owner of the pet!");
 
 
         public static final ImmutableList<IConfigValue> OPTIONS = ImmutableList.of(
@@ -49,6 +49,7 @@ public class Configs implements IConfigHandler {
                 ANTIGHOST_RANGE,
                 AUTO_TOTEM,
                 DERP_MODE,
+                DISPLAY_PET_OWNER,
                 DISPLAY_PLAYER_HEALTH,
                 OPEN_GUI_SETTINGS,
                 STEP_MODE

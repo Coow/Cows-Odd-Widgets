@@ -14,4 +14,6 @@ public class CowsOddWidgets implements ModInitializer {
         InitializationHandler.getInstance().registerInitializationHandler(new InitHandler());
         System.out.println("Moo!");
     }
+
+
 }
