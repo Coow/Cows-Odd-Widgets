@@ -12,6 +12,7 @@ group = project.maven_group
 
 repositories {
 	maven { url 'https://masa.dy.fi/maven' }
+	maven { url 'https://maven.terraformersmc.com/' }
 }
 
 dependencies {
