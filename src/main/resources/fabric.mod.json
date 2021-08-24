@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "xyz.mrcow.cowsOddWidgets.CowsOddWidgets"
+    ],
+    "modmenu": [
+      "xyz.mrcow.cowsOddWidgets.compat.modmenu.ModMenuImpl"
     ]
   },
   "mixins": [
