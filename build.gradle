@@ -12,6 +12,7 @@ group = project.maven_group
 
 repositories {
 	maven { url 'https://masa.dy.fi/maven' }
+	maven { url 'https://maven.terraformersmc.com/' }
 }
 
 dependencies {
@@ -28,6 +29,8 @@ dependencies {
 
 	//Add Malilib
 	modImplementation "fi.dy.masa.malilib:malilib-fabric-${project.MC_VER}:${project.MALILIB_VER}"
+
+	modCompileOnly "com.terraformersmc:modmenu:${project.mod_menu_version}"
 }
 
 processResources {
