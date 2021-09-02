@@ -8,6 +8,7 @@ import fi.dy.masa.malilib.config.IConfigHandler;
 import fi.dy.masa.malilib.config.IConfigValue;
 import fi.dy.masa.malilib.config.IHotkeyTogglable;
 import fi.dy.masa.malilib.config.options.*;
+import fi.dy.masa.malilib.hotkeys.KeybindSettings;
 import fi.dy.masa.malilib.util.FileUtils;
 import fi.dy.masa.malilib.util.JsonUtils;
 import xyz.mrcow.cowsOddWidgets.Reference;
@@ -27,7 +28,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigInteger ANTIGHOST_RANGE = new ConfigInteger("antiGhostRange", 6, 2, 10, true, "Range of AntiGhost features area\nValues over 6 might cause issues due to the AntiCheat detecting out of reach blocks");
         public static final ConfigHotkey ANTIGHOST = new ConfigHotkey("antiGhost", "LEFT_CONTROL,G", "Refreshes blocks near you");
 
-        public static final ConfigHotkey OPEN_GUI_SETTINGS = new ConfigHotkey("openGuiSettings","C,O,W",  "Open the Config GUI");
+        public static final ConfigHotkey OPEN_GUI_SETTINGS = new ConfigHotkey("openGuiSettings","C,O,W", KeybindSettings.PRESS_NON_ORDER_SENSITIVE, "Open the Config GUI");
         public static final ConfigHotkey TOGGLE_DERP_MODE = new ConfigHotkey("toggleDerpMode","",  "Toggle Derp Mode");
         //public static final ConfigHotkey    TOGGLE_AUTO_TOTEM = new ConfigHotkey("toggleAutoTotem","",  "Toggle Auto Totem");
         public static final ConfigBooleanHotkeyed    TOGGLE_AUTO_TOTEM = new ConfigBooleanHotkeyed("toggleAutoTotem", false, "",  "Toggle Auto Totem");
