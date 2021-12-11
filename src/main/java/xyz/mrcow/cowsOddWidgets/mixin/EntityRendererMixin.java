@@ -76,7 +76,7 @@ public class EntityRendererMixin<T extends Entity> {
                 matrices.translate(0.0D, height, 0.0D);
                 matrices.multiply(this.dispatcher.getRotation());
                 matrices.scale(-0.025F, -0.025F, 0.025F);
-                Matrix4f matrix4f = matrices.peek().getModel();
+                Matrix4f matrix4f = matrices.peek().getPositionMatrix();
                 TextRenderer textRenderer = entityRenderer.getTextRenderer();
                 float x = (float) (-textRenderer.getWidth(text) / 2);
 
