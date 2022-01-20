@@ -6,7 +6,6 @@ import com.google.gson.JsonObject;
 import fi.dy.masa.malilib.config.ConfigUtils;
 import fi.dy.masa.malilib.config.IConfigHandler;
 import fi.dy.masa.malilib.config.IConfigValue;
-import fi.dy.masa.malilib.config.IHotkeyTogglable;
 import fi.dy.masa.malilib.config.options.*;
 import fi.dy.masa.malilib.hotkeys.KeybindSettings;
 import fi.dy.masa.malilib.util.FileUtils;
@@ -32,6 +31,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigHotkey TOGGLE_DERP_MODE = new ConfigHotkey("toggleDerpMode","",  "Toggle Derp Mode");
         //public static final ConfigHotkey    TOGGLE_AUTO_TOTEM = new ConfigHotkey("toggleAutoTotem","",  "Toggle Auto Totem");
         public static final ConfigBooleanHotkeyed    TOGGLE_AUTO_TOTEM = new ConfigBooleanHotkeyed("toggleAutoTotem", false, "",  "Toggle Auto Totem");
+        public static final ConfigHotkey STOP_ELYTRA = new ConfigHotkey("stopElytra","LEFT_CONTROL,R","Prevents flying while hotkey pressed");
 
         public static final ConfigBoolean STEP_MODE = new ConfigBoolean("stepMode", false,"Makes you step up blocks instead of having to jump!\nHard coded to be avoid cheaty behaviour");
         public static final ConfigBoolean STEP_MODE_BLOCKED_BY_SNEAK = new ConfigBoolean("stepModeBlockedBySneak", false,"If you are sneaking Stepping wont be happening");
@@ -55,12 +55,14 @@ public class Configs implements IConfigHandler {
                 DISPLAY_PLAYER_HEALTH,
                 OPEN_GUI_SETTINGS,
                 STEP_MODE,
-                STEP_MODE_BLOCKED_BY_SNEAK
+                STEP_MODE_BLOCKED_BY_SNEAK,
+                STOP_ELYTRA
         );
 
         public static final List<ConfigHotkey> HOTKEY_LIST = ImmutableList.of(
                 ANTIGHOST,
-                OPEN_GUI_SETTINGS
+                OPEN_GUI_SETTINGS,
+                STOP_ELYTRA
         );
     }
 
