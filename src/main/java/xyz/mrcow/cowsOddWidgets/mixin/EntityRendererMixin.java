@@ -46,17 +46,11 @@ public class EntityRendererMixin<T extends Entity> {
     @Inject(at = {@At("HEAD")},
     method = {"render"})
     private void render(T entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci){
-        //If HUD is hidden
-        if (MinecraftClient.getInstance().options.hudHidden) return;
-        //If the feature is enabled
-        if (!Configs.Settings.DISPLAY_PET_OWNER.getBooleanValue()) return;
-        //If the entity is not targeted
-        if (dispatcher.targetedEntity != entity) return;
-        //If the player is riding the entity
-        if (entity.hasPassenger(MinecraftClient.getInstance().player)) return;
 
         List<UUID> ownerIds = DisplayPetOwner.getOwnerIds(entity);
-        if (ownerIds.isEmpty()) return;
+
+        //If HUD is hidden or the feature is enabled or the entity is not targeted or the player is riding the entity.
+        if (MinecraftClient.getInstance().options.hudHidden || !Configs.Settings.DISPLAY_PET_OWNER.getBooleanValue() || dispatcher.targetedEntity != entity || entity.hasPassenger(MinecraftClient.getInstance().player) || ownerIds.isEmpty()) return;
 
         for (int i = 0; i < ownerIds.size(); i++) {
             UUID ownerId = ownerIds.get(i);
@@ -64,8 +58,8 @@ public class EntityRendererMixin<T extends Entity> {
 
             Optional<String> usernameString = DisplayPetOwner.getNameFromId(ownerId);
 
-            Text text = new LiteralText(usernameString.isPresent() ?
-                    "§e" + usernameString.get() : "§4Error!");
+            Text text = new LiteralText(usernameString.map(s -> "§e" + s).orElse("§4Error!"));
+
 
             double d = this.dispatcher.getSquaredDistanceToCamera(entity);
             @SuppressWarnings("rawtypes") EntityRenderer entityRenderer = (EntityRenderer) (Object) this;
