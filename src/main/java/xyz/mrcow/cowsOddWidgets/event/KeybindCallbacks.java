@@ -44,6 +44,9 @@ public class KeybindCallbacks implements IHotkeyCallback {
         } else if(key == Configs.Settings.ANTIGHOST.getKeybind()){
             AntiGhost.requestBlocks(Configs.Settings.ANTIGHOST_RANGE.getIntegerValue());
             return true;
+        } else if(key == Configs.Settings.STOP_ELYTRA.getKeybind()){
+            mc.player.stopFallFlying();
+            return false;
         }
 
         return false;
