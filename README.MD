@@ -43,8 +43,18 @@ Displays the Player's health next to their name
 
 Category: Useful
 
+### Display Mob Health
+Displays the health of mobs in their extra information labels (next to their owners' names)
+
+Category: Useful
+
 ### Step Mode
 Step up blocks instead of having to jump.
 Hard Coded to be 1 block to avoid cheaty behavior
+
+Category: Useful
+
+### Stop Elytra
+While holding the assigned hotkey, will not use elytra
 
 Category: Useful

@@ -116,7 +116,7 @@ public abstract class EntityRendererMixin<T extends Entity> {
                 }
             }
 
-            if (extras.health != null && !extras.health.getString().isEmpty())
+            if (!extras.healthEmpty())
             {
                 TextRenderer textRenderer = entityRenderer.getTextRenderer();
                 float height = entity.getHeight() + 0.5F;
