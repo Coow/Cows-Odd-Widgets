@@ -11,13 +11,18 @@ public class EntityExtraInfo {
     public boolean isEmpty()
     {
         return(
-                (namesEmpty()) &&
-                health.getString().isEmpty()
+                namesEmpty() &&
+                healthEmpty()
                 );
     }
 
     public boolean namesEmpty()
     {
         return (names == null || names.isEmpty() || names.stream().allMatch(val -> val == null || val.getString().isEmpty()));
+    }
+
+    public boolean healthEmpty()
+    {
+        return (health == null || health.getString().isEmpty());
     }
 }
