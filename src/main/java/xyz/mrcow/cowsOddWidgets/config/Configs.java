@@ -36,6 +36,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigBoolean STEP_MODE = new ConfigBoolean("stepMode", false,"Makes you step up blocks instead of having to jump!\nHard coded to be avoid cheaty behaviour");
         public static final ConfigBoolean STEP_MODE_BLOCKED_BY_SNEAK = new ConfigBoolean("stepModeBlockedBySneak", false,"If you are sneaking Stepping wont be happening");
         public static final ConfigBoolean DISPLAY_PLAYER_HEALTH = new ConfigBoolean("displayPlayerHealth", false,"Displays players health in the Name Text");
+        public static final ConfigBoolean DISPLAY_MOB_HEALTH = new ConfigBoolean("displayMobHealth", false, "Displays the health of mobs in the Name Text");
         public static final ConfigBoolean DERP_MODE = new ConfigBoolean("derpMode", false,"Spins the players head server side\nMight mess with Tweakeroo features, such as flexibleBlockRotation");
         public static final ConfigBoolean AUTO_TOTEM = new ConfigBoolean("autoTotem", false,"Automatically put a Totem of Undying in the players offhand if there is one avaliable elsewhere in the inventory");
         public static final ConfigBoolean DISPLAY_PET_OWNER = new ConfigBoolean("displayPetOwner", false,"Displays the owner of the pet!");
@@ -53,6 +54,7 @@ public class Configs implements IConfigHandler {
                 DERP_MODE,
                 DISPLAY_PET_OWNER,
                 DISPLAY_PLAYER_HEALTH,
+                DISPLAY_MOB_HEALTH,
                 OPEN_GUI_SETTINGS,
                 STEP_MODE,
                 STEP_MODE_BLOCKED_BY_SNEAK,
