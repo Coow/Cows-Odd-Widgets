@@ -1,18 +1,23 @@
 package xyz.mrcow.cowsOddWidgets.event;
 
 import fi.dy.masa.malilib.config.options.ConfigHotkey;
-import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.hotkeys.IHotkeyCallback;
 import fi.dy.masa.malilib.hotkeys.IKeybind;
 import fi.dy.masa.malilib.hotkeys.KeyAction;
 import net.minecraft.client.MinecraftClient;
 import xyz.mrcow.cowsOddWidgets.config.Configs;
-import xyz.mrcow.cowsOddWidgets.gui.GuiConfigs;
+import xyz.mrcow.cowsOddWidgets.features.IKeybindable;
+import xyz.mrcow.cowsOddWidgets.features.OpenGui;
+import xyz.mrcow.cowsOddWidgets.features.StopElytra;
 import xyz.mrcow.cowsOddWidgets.features.AntiGhost;
+
+import java.util.HashMap;
 
 public class KeybindCallbacks implements IHotkeyCallback {
 
     public static final KeybindCallbacks INSTANCE = new KeybindCallbacks();
+
+    public HashMap<IKeybind, IKeybindable> keyList = new HashMap<>();
 
     public static KeybindCallbacks getInstance()
     {
@@ -25,6 +30,10 @@ public class KeybindCallbacks implements IHotkeyCallback {
         {
             hotkey.getKeybind().setCallback(this);
         }
+
+        keyList.put(Configs.Settings.ANTIGHOST.getKeybind(), new AntiGhost());
+        keyList.put(Configs.Settings.STOP_ELYTRA.getKeybind(), new StopElytra());
+        keyList.put(Configs.Settings.OPEN_GUI_SETTINGS.getKeybind(), new OpenGui());
     }
 
     @Override
@@ -37,16 +46,9 @@ public class KeybindCallbacks implements IHotkeyCallback {
             return false;
         }
 
-        if (key == Configs.Settings.OPEN_GUI_SETTINGS.getKeybind())
+        if (keyList.containsKey(key))
         {
-            GuiBase.openGui(new GuiConfigs());
-            return true;
-        } else if(key == Configs.Settings.ANTIGHOST.getKeybind()){
-            AntiGhost.requestBlocks(Configs.Settings.ANTIGHOST_RANGE.getIntegerValue());
-            return true;
-        } else if(key == Configs.Settings.STOP_ELYTRA.getKeybind()){
-            mc.player.stopFallFlying();
-            return false;
+            return keyList.get(key).invokeHotkey();
         }
 
         return false;
