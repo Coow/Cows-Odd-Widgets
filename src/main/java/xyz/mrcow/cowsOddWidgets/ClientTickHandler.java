@@ -10,7 +10,7 @@ import xyz.mrcow.cowsOddWidgets.features.DerpMode;
 public class ClientTickHandler implements IClientTickHandler {
 
     float extraStep = 1.125F;
-    float normalStep = 0.5F;
+    float normalStep = 0.51F;
 
     @Override
     public void onClientTick(MinecraftClient mc){
