@@ -38,8 +38,7 @@ public class InputHandler implements IKeybindProvider, IKeyboardInputHandler {
         if (eventKeyState)
         {
             MinecraftClient mc = MinecraftClient.getInstance();
-
-            if (mc.options.keyUse.matchesKey(keyCode, scanCode))
+            if (mc.options.useKey.matchesKey(keyCode, scanCode))
             {
                 return this.handleUseKey(mc);
             }
