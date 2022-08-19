@@ -10,7 +10,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.Matrix4f;
@@ -72,7 +71,7 @@ public abstract class EntityRendererMixin<T extends Entity> {
 
                 if (!usernameString.isEmpty())
                 {
-                    extraInfo.names.add(new LiteralText(usernameString.isPresent() ?
+                    extraInfo.names.add(Text.literal(usernameString.isPresent() ?
                             "§e" + usernameString.get() : "§4Error!").formatted(Formatting.YELLOW));
                 }
             }
@@ -80,7 +79,7 @@ public abstract class EntityRendererMixin<T extends Entity> {
 
         if (Configs.Settings.DISPLAY_MOB_HEALTH.getBooleanValue() && entity instanceof MobEntity)
         {
-            extraInfo.health = DisplayPlayerHealth.addHealthText((MobEntity)entity, new LiteralText("").formatted(Formatting.RED));
+            extraInfo.health = DisplayPlayerHealth.addHealthText((MobEntity)entity, Text.literal("").formatted(Formatting.RED));
         }
 
         if (extraInfo.isEmpty()) return;

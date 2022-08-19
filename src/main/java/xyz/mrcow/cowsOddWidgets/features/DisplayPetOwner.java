@@ -7,7 +7,7 @@ import com.mojang.authlib.GameProfile;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.FoxEntity;
-import net.minecraft.entity.passive.HorseBaseEntity;
+import net.minecraft.entity.passive.HorseEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import xyz.mrcow.cowsOddWidgets.mixin.FoxEntityMixin;
 
@@ -47,10 +47,10 @@ public class DisplayPetOwner {
             }
         }
 
-        if (entity instanceof HorseBaseEntity horseBaseEntity) {
+        if (entity instanceof HorseEntity horseEntity) {
 
-            if (horseBaseEntity.isTame()) {
-                return Collections.singletonList(horseBaseEntity.getOwnerUuid());
+            if (horseEntity.isTame()) {
+                return Collections.singletonList(horseEntity.getOwnerUuid());
             }
         }
 

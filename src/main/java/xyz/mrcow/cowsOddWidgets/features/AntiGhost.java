@@ -2,7 +2,7 @@ package xyz.mrcow.cowsOddWidgets.features;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
-import net.minecraft.network.MessageType;
+//import net.minecraft.network.MessageType;
 import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
@@ -12,7 +12,8 @@ public class AntiGhost {
     public static void requestBlocks(double range) {
         MinecraftClient mc = MinecraftClient.getInstance();
 
-        mc.inGameHud.addChatMessage(MessageType.SYSTEM, Text.of("Requesting blocks!"), mc.player.getUuid());
+        //mc.inGameHud.addChatMessage(MessageType.SYSTEM, Text.of("Requesting blocks!"), mc.player.getUuid());
+
 
         ClientPlayNetworkHandler conn = mc.getNetworkHandler();
         if (conn==null)

@@ -1,7 +1,6 @@
 package xyz.mrcow.cowsOddWidgets.features;
 
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -15,7 +14,7 @@ public class DisplayPlayerHealth {
 
         int health = (int)entity.getHealth();
 
-        MutableText formattedHealth = new LiteralText(" ")
+        MutableText formattedHealth = Text.literal(" ")
                 .append(Integer.toString(health)).formatted(getColor(health));
         return ((MutableText)nametag).append(formattedHealth);
     }
