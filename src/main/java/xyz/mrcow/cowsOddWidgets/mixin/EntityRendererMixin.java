@@ -12,7 +12,7 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.math.Matrix4f;
+import org.joml.Matrix4f;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -31,14 +31,18 @@ import java.util.UUID;
 
 @Mixin(EntityRenderer.class)
 public abstract class EntityRendererMixin<T extends Entity> {
+
+
     @Inject(at = {@At("HEAD")},
-    method = {"renderLabelIfPresent(Lnet/minecraft/entity/Entity;Lnet/minecraft/text/Text;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V"},
-            cancellable = true)
+    method = {"renderLabelIfPresent(Lnet/minecraft/entity/Entity;Lnet/minecraft/text/Text;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V"}
+    )
     private void renderLabelIfPresent(T entity, Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
         if(entity instanceof PlayerEntity && Configs.Settings.DISPLAY_PLAYER_HEALTH.getBooleanValue()){
             text = DisplayPlayerHealth.addHealthText((LivingEntity) entity, text);
         }
     }
+
+
 
     @Final
     @Shadow
@@ -50,11 +54,13 @@ public abstract class EntityRendererMixin<T extends Entity> {
     method = {"render"})
     private void render(T entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci){
         //If HUD is hidden
-        if (MinecraftClient.getInstance().options.hudHidden) return;
-        //If the entity is not targeted
-        if (dispatcher.targetedEntity != entity) return;
-        //If the player is riding the entity
-        if (entity.hasPassenger(MinecraftClient.getInstance().player)) return;
+        if (MinecraftClient.getInstance().options.hudHidden ||
+                //If the entity is not targeted
+                dispatcher.targetedEntity != entity ||
+                //If the player is riding the entity
+                entity.hasPassenger(MinecraftClient.getInstance().player)
+        ) return;
+
 
         EntityExtraInfo extraInfo = new EntityExtraInfo();
 
@@ -63,16 +69,13 @@ public abstract class EntityRendererMixin<T extends Entity> {
         {
             List<UUID> ownerIds = DisplayPetOwner.getOwnerIds(entity);
 
-            for (int i = 0; i < ownerIds.size(); i++) {
-                UUID ownerId = ownerIds.get(i);
+            for (UUID ownerId : ownerIds) {
                 if (ownerId == null) return;
 
                 Optional<String> usernameString = DisplayPetOwner.getNameFromId(ownerId);
 
-                if (!usernameString.isEmpty())
-                {
-                    extraInfo.names.add(Text.literal(usernameString.isPresent() ?
-                            "§e" + usernameString.get() : "§4Error!").formatted(Formatting.YELLOW));
+                if (usernameString.isPresent()) {
+                    extraInfo.names.add(Text.literal(usernameString.map(s -> "§e" + s).orElse("§4Error!")).formatted(Formatting.YELLOW));
                 }
             }
         }
@@ -82,8 +85,7 @@ public abstract class EntityRendererMixin<T extends Entity> {
             extraInfo.health = DisplayPlayerHealth.addHealthText((MobEntity)entity, Text.literal("").formatted(Formatting.RED));
         }
 
-        if (extraInfo.isEmpty()) return;
-        else
+        if (!extraInfo.isEmpty())
         {
             renderExtras(entity, extraInfo, matrices, vertexConsumers, light);
         }
@@ -109,7 +111,7 @@ public abstract class EntityRendererMixin<T extends Entity> {
                     {
                         maxwidth = textwidth;
                     }
-                    float x = (float) (-textwidth / 2);
+                    float x = -textwidth / 2;
 
                     renderExtraLabel(entityRenderer, extras.names.get(i), y, x, height, matrices, vertexConsumers, light);
                 }
@@ -144,8 +146,10 @@ public abstract class EntityRendererMixin<T extends Entity> {
         float backgroundOpacity = MinecraftClient.getInstance().options.getTextBackgroundOpacity(0.25F);
         int backgroundColor = (int) (backgroundOpacity * 255.0F) << 24;
 
-        textRenderer.draw(text, x, (float) y, text.getStyle().getColor().hashCode(), false, matrix4f, vertexConsumers, true, backgroundColor, light);
-        textRenderer.draw(text, x, (float) y, -1, false, matrix4f, vertexConsumers, false, 0, light);
+
+
+        textRenderer.draw(text, x, y, text.getStyle().getColor().hashCode(), false, matrix4f, vertexConsumers, TextRenderer.TextLayerType.NORMAL, backgroundColor, light);
+        textRenderer.draw(text, x, y, -1, false, matrix4f, vertexConsumers, TextRenderer.TextLayerType.NORMAL, 0, light);
 
         matrices.pop();
     }
