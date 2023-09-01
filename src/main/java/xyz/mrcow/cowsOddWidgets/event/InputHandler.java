@@ -48,7 +48,6 @@ public class InputHandler implements IKeybindProvider, IKeyboardInputHandler {
 
     private boolean handleUseKey(MinecraftClient mc)
     {
-        boolean cancel = false;
 
         return false;
     }

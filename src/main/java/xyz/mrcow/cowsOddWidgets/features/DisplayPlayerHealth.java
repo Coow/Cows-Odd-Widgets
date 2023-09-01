@@ -16,6 +16,7 @@ public class DisplayPlayerHealth {
 
         MutableText formattedHealth = Text.literal(" ")
                 .append(Integer.toString(health)).formatted(getColor(health));
+
         return ((MutableText)nametag).append(formattedHealth);
     }
 

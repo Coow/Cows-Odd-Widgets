@@ -9,19 +9,20 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
 public class AntiGhost {
-    public static void requestBlocks(double range) {
+    public static void requestBlocks(int range) {
         MinecraftClient mc = MinecraftClient.getInstance();
 
-        //mc.inGameHud.addChatMessage(MessageType.SYSTEM, Text.of("Requesting blocks!"), mc.player.getUuid());
+        mc.inGameHud.setOverlayMessage(Text.of("Requesting blocks!"), false);
+//        mc.player.sendMessage(Text.of("Requesting blocks!"), true);
 
 
         ClientPlayNetworkHandler conn = mc.getNetworkHandler();
         if (conn==null)
             return;
         BlockPos pos=mc.player.getBlockPos();
-        for (double dx=-range; dx<=range; dx++)
-            for (double dy=-range; dy<=range; dy++)
-                for (double dz=-range; dz<=range; dz++) {
+        for (int dx=-range; dx<=range; dx++)
+            for (int dy=-range; dy<=range; dy++)
+                for (int dz=-range; dz<=range; dz++) {
                     PlayerActionC2SPacket packet=new PlayerActionC2SPacket(
                             PlayerActionC2SPacket.Action.ABORT_DESTROY_BLOCK,
                             //PlayerActionC2SPacket.Action.START_DESTROY_BLOCK,

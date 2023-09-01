@@ -9,6 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.FoxEntity;
 import net.minecraft.entity.passive.HorseEntity;
 import net.minecraft.entity.passive.TameableEntity;
+import org.jetbrains.annotations.NotNull;
 import xyz.mrcow.cowsOddWidgets.mixin.FoxEntityMixin;
 
 import java.util.*;
