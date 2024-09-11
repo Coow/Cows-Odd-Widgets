@@ -7,12 +7,12 @@ import org.apache.logging.log4j.Logger;
 
 public class CowsOddWidgets implements ModInitializer {
 
-    public static final Logger logger = LogManager.getLogger(Reference.MOD_ID);
+    public static final Logger LOGGER = LogManager.getLogger(Reference.MOD_ID);
 
     @Override
     public void onInitialize() {
         InitializationHandler.getInstance().registerInitializationHandler(new InitHandler());
-        System.out.println("Moo!");
+        LOGGER.info("Moo!");
     }
 
 

@@ -3,6 +3,7 @@ package xyz.mrcow.cowsOddWidgets.gui;
 import java.util.Collections;
 import java.util.List;
 import fi.dy.masa.malilib.config.IConfigBase;
+import fi.dy.masa.malilib.config.options.BooleanHotkeyGuiWrapper;
 import fi.dy.masa.malilib.gui.GuiConfigsBase;
 import fi.dy.masa.malilib.gui.button.ButtonBase;
 import fi.dy.masa.malilib.gui.button.ButtonGeneric;
@@ -10,6 +11,7 @@ import fi.dy.masa.malilib.gui.button.IButtonActionListener;
 import fi.dy.masa.malilib.util.StringUtils;
 import xyz.mrcow.cowsOddWidgets.Reference;
 import xyz.mrcow.cowsOddWidgets.config.Configs;
+import xyz.mrcow.cowsOddWidgets.config.FeatureToggle;
 
 public class GuiConfigs extends GuiConfigsBase {
 
@@ -60,20 +62,24 @@ public class GuiConfigs extends GuiConfigsBase {
     @Override
     public List<ConfigOptionWrapper> getConfigs()
     {
-        List<? extends IConfigBase> configs;
         ConfigGuiTab tab = GuiConfigs.tab;
 
-        if (tab == ConfigGuiTab.GENERIC)
-        {
-            configs = Configs.Settings.OPTIONS;
+        if (tab == ConfigGuiTab.GENERIC) {
+            return ConfigOptionWrapper.createFor(Configs.Settings.OPTIONS);
         }
-        else
-        {
-            return Collections.emptyList();
+        if (tab == ConfigGuiTab.FEATURE_TOGGLE) {
+            return ConfigOptionWrapper.createFor(FeatureToggle.VALUES.stream().map(this::wrapConfig).toList());
         }
 
-        return ConfigOptionWrapper.createFor(configs);
+        return Collections.emptyList();
+
     }
+
+    protected BooleanHotkeyGuiWrapper wrapConfig(FeatureToggle config)
+    {
+        return new BooleanHotkeyGuiWrapper(config.getName(), config, config.getKeybind());
+    }
+
 
     private static class ButtonListener implements IButtonActionListener
     {
@@ -99,7 +105,8 @@ public class GuiConfigs extends GuiConfigsBase {
 
     public enum ConfigGuiTab
     {
-        GENERIC ("Generic");
+        GENERIC ("Generic"),
+        FEATURE_TOGGLE ("FeatureToggle");
 
         private final String translationKey;
 

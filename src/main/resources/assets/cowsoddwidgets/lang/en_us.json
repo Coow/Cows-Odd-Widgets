@@ -1,0 +1,15 @@
+{
+  "cowsoddwidgets.label.config_comment.single_player_only": "§6Note: This feature works either at all or§r\n§6at least fully only in single player§r",
+
+
+
+  "cowsoddwidgets.config.feature_toggle.comment.stepMode": "Makes you step up blocks instead of having to jump!\nHard coded to be avoid cheaty behaviour",
+  "cowsoddwidgets.config.feature_toggle.comment.stepModeBlockedBySneak": "If you are sneaking Stepping wont be happening",
+  "cowsoddwidgets.config.feature_toggle.comment.displayPlayerHealth": "Displays players health in the Name Text",
+  "cowsoddwidgets.config.feature_toggle.comment.displayMobHealth":  "Displays the health of mobs in the Name Text",
+  "cowsoddwidgets.config.feature_toggle.comment.derpMode": "Spins the players head server side\nMight mess with Tweakeroo features: such as flexibleBlockRotation",
+  "cowsoddwidgets.config.feature_toggle.comment.autoTotem": "Automatically put a Totem of Undying in the players offhand if there is one avaliable elsewhere in the inventory",
+  "cowsoddwidgets.config.feature_toggle.comment.displayPetOwner": "Displays the owner of the pet!",
+  "cowsoddwidgets.config.feature_toggle.comment.agreeMode": "Makes you agree to everything!"
+}
+

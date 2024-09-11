@@ -5,7 +5,7 @@ import net.minecraft.text.Text;
 import java.util.ArrayList;
 
 public class EntityExtraInfo {
-    public ArrayList<Text> names = new ArrayList<Text>();
+    public ArrayList<Text> names = new ArrayList<>();
     public Text health;
 
     public boolean isEmpty()

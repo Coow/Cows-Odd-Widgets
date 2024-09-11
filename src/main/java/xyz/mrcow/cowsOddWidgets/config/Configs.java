@@ -20,7 +20,6 @@ public class Configs implements IConfigHandler {
     private static final String CONFIG_FILE_NAME = Reference.MOD_ID + ".json";
 
     public static class Settings {
-        public static final ConfigBoolean AGREE_MODE = new ConfigBoolean("agreeMode", false,"Makes you agree to everything!");
         public static final ConfigDouble AGREEMENT = new ConfigDouble("agreement", 10, 1, 15, true, "How much you agree");
         public static final ConfigDouble AGREEMENT_SPEED = new ConfigDouble("agreementSpeed", 50, 10, 180, true, "How fast you agree");
 
@@ -28,36 +27,17 @@ public class Configs implements IConfigHandler {
         public static final ConfigHotkey ANTIGHOST = new ConfigHotkey("antiGhost", "LEFT_CONTROL,G", "Refreshes blocks near you");
 
         public static final ConfigHotkey OPEN_GUI_SETTINGS = new ConfigHotkey("openGuiSettings","C,O,W", KeybindSettings.PRESS_NON_ORDER_SENSITIVE, "Open the Config GUI");
-        public static final ConfigHotkey TOGGLE_DERP_MODE = new ConfigHotkey("toggleDerpMode","",  "Toggle Derp Mode");
-        //public static final ConfigHotkey    TOGGLE_AUTO_TOTEM = new ConfigHotkey("toggleAutoTotem","",  "Toggle Auto Totem");
-        public static final ConfigBooleanHotkeyed    TOGGLE_AUTO_TOTEM = new ConfigBooleanHotkeyed("toggleAutoTotem", false, "",  "Toggle Auto Totem");
         public static final ConfigHotkey STOP_ELYTRA = new ConfigHotkey("stopElytra","LEFT_CONTROL,R","Prevents flying while hotkey pressed");
 
-        public static final ConfigBoolean STEP_MODE = new ConfigBoolean("stepMode", false,"Makes you step up blocks instead of having to jump!\nHard coded to be avoid cheaty behaviour");
-        public static final ConfigBoolean STEP_MODE_BLOCKED_BY_SNEAK = new ConfigBoolean("stepModeBlockedBySneak", false,"If you are sneaking Stepping wont be happening");
-        public static final ConfigBoolean DISPLAY_PLAYER_HEALTH = new ConfigBoolean("displayPlayerHealth", false,"Displays players health in the Name Text");
-        public static final ConfigBoolean DISPLAY_MOB_HEALTH = new ConfigBoolean("displayMobHealth", false, "Displays the health of mobs in the Name Text");
-        public static final ConfigBoolean DERP_MODE = new ConfigBoolean("derpMode", false,"Spins the players head server side\nMight mess with Tweakeroo features, such as flexibleBlockRotation");
-        public static final ConfigBoolean AUTO_TOTEM = new ConfigBoolean("autoTotem", false,"Automatically put a Totem of Undying in the players offhand if there is one avaliable elsewhere in the inventory");
-        public static final ConfigBoolean DISPLAY_PET_OWNER = new ConfigBoolean("displayPetOwner", false,"Displays the owner of the pet!");
+
 
 
         public static final ImmutableList<IConfigValue> OPTIONS = ImmutableList.of(
-                //TOGGLE_AUTO_TOTEM,
-                //TOGGLE_DERP_MODE,
                 AGREEMENT,
                 AGREEMENT_SPEED,
-                AGREE_MODE,
                 ANTIGHOST,
                 ANTIGHOST_RANGE,
-                AUTO_TOTEM,
-                DERP_MODE,
-                DISPLAY_PET_OWNER,
-                DISPLAY_PLAYER_HEALTH,
-                DISPLAY_MOB_HEALTH,
                 OPEN_GUI_SETTINGS,
-                STEP_MODE,
-                STEP_MODE_BLOCKED_BY_SNEAK,
                 STOP_ELYTRA
         );
 
@@ -72,15 +52,15 @@ public class Configs implements IConfigHandler {
     {
         File configFile = new File(FileUtils.getConfigDirectory(), CONFIG_FILE_NAME);
 
-        if (configFile.exists() && configFile.isFile() && configFile.canRead())
-        {
+        if (configFile.exists() && configFile.isFile() && configFile.canRead()) {
             JsonElement element = JsonUtils.parseJsonFile(configFile);
 
-            if (element != null && element.isJsonObject())
-            {
+            if (element != null && element.isJsonObject()) {
                 JsonObject root = element.getAsJsonObject();
 
                 ConfigUtils.readConfigBase(root, "Generic", Settings.OPTIONS);
+                ConfigUtils.readHotkeyToggleOptions(root, "FeatureHotkeys", "FeatureToggles", FeatureToggle.VALUES);
+
             }
         }
     }
@@ -94,6 +74,8 @@ public class Configs implements IConfigHandler {
             JsonObject root = new JsonObject();
 
             ConfigUtils.writeConfigBase(root, "Generic", Settings.OPTIONS);
+
+            ConfigUtils.writeHotkeyToggleOptions(root, "FeatureHotkeys", "FeatureToggles", FeatureToggle.VALUES);
 
             JsonUtils.writeJsonToFile(root, new File(dir, CONFIG_FILE_NAME));
         }

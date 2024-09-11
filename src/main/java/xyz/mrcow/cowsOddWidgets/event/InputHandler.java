@@ -1,5 +1,6 @@
 package xyz.mrcow.cowsOddWidgets.event;
 
+import com.google.common.collect.ImmutableList;
 import fi.dy.masa.malilib.hotkeys.IHotkey;
 import fi.dy.masa.malilib.hotkeys.IKeybindManager;
 import fi.dy.masa.malilib.hotkeys.IKeybindProvider;
@@ -7,6 +8,7 @@ import fi.dy.masa.malilib.hotkeys.IKeyboardInputHandler;
 import net.minecraft.client.MinecraftClient;
 import xyz.mrcow.cowsOddWidgets.Reference;
 import xyz.mrcow.cowsOddWidgets.config.Configs;
+import xyz.mrcow.cowsOddWidgets.config.FeatureToggle;
 
 public class InputHandler implements IKeybindProvider, IKeyboardInputHandler {
 
@@ -24,12 +26,19 @@ public class InputHandler implements IKeybindProvider, IKeyboardInputHandler {
         {
             manager.addKeybindToMap(hotkey.getKeybind());
         }
+
+        for (FeatureToggle toggle : FeatureToggle.values())
+        {
+            manager.addKeybindToMap(toggle.getKeybind());
+        }
+
     }
 
     @Override
     public void addHotkeys(IKeybindManager manager)
     {
         manager.addHotkeysForCategory(Reference.MOD_NAME, "Generic", Configs.Settings.HOTKEY_LIST);
+        manager.addHotkeysForCategory(Reference.MOD_NAME, Reference.MOD_ID + ".hotkeys.category.tweak_toggle_hotkeys", FeatureToggle.VALUES);
     }
 
     @Override
@@ -48,7 +57,6 @@ public class InputHandler implements IKeybindProvider, IKeyboardInputHandler {
 
     private boolean handleUseKey(MinecraftClient mc)
     {
-        boolean cancel = false;
 
         return false;
     }

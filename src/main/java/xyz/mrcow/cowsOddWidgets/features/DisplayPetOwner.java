@@ -9,6 +9,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.FoxEntity;
 import net.minecraft.entity.passive.HorseEntity;
 import net.minecraft.entity.passive.TameableEntity;
+import org.jetbrains.annotations.NotNull;
+import xyz.mrcow.cowsOddWidgets.CowsOddWidgets;
 import xyz.mrcow.cowsOddWidgets.mixin.FoxEntityMixin;
 
 import java.util.*;
@@ -24,11 +26,17 @@ public class DisplayPetOwner {
             .expireAfterWrite(6, TimeUnit.HOURS)
             .build(new CacheLoader<>() {
                 @Override
-                public Optional<String> load(UUID key) {
+                public @NotNull Optional<String> load(@NotNull UUID key) {
                     CompletableFuture.runAsync(() -> {
-                        GameProfile playerProfile = new GameProfile(key, null);
-                        playerProfile = MinecraftClient.getInstance().getSessionService().fillProfileProperties(playerProfile, false);
-                        usernameCache.put(key, Optional.ofNullable(playerProfile.getName()));
+                        GameProfile playerProfile = new GameProfile(key, "null");
+                        playerProfile = MinecraftClient.getInstance().getSessionService().fetchProfile(playerProfile.getId(), false).profile();
+                        if (playerProfile == null) {
+                            usernameCache.put(key, Optional.empty());
+                        } else {
+                            usernameCache.put(key, Optional.ofNullable(playerProfile.getName()));
+                        }
+
+
                     });
 
                     return Optional.of("Waiting...");
@@ -40,18 +48,12 @@ public class DisplayPetOwner {
     }
 
     public static List<UUID> getOwnerIds(Entity entity) {
-        if (entity instanceof TameableEntity tameableEntity) {
-
-            if (tameableEntity.isTamed()) {
+        if (entity instanceof TameableEntity tameableEntity && tameableEntity.isTamed()) {
                 return Collections.singletonList(tameableEntity.getOwnerUuid());
-            }
         }
 
-        if (entity instanceof HorseEntity horseEntity) {
-
-            if (horseEntity.isTame()) {
+        if (entity instanceof HorseEntity horseEntity && horseEntity.isTame()) {
                 return Collections.singletonList(horseEntity.getOwnerUuid());
-            }
         }
 
         if (entity instanceof FoxEntity foxEntity) {
